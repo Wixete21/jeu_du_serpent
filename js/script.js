@@ -20,15 +20,21 @@ document.addEventListener("DOMContentLoaded", function(event) {
 
         nouvellePartie(){
 
+        this.finPartie();
+
         this.affichagePointage(1);
 
-        this.pomme = new Pomme();
+        this.pomme = new Pomme(this);
 
         this.serpent = new Serpent();
 
         }
 
         finPartie(){
+            if(this.pomme !== undefined){
+                this.pomme.supprimePomme();
+                this.pomme = undefined;
+            }
 
         }
 
@@ -53,12 +59,26 @@ document.addEventListener("DOMContentLoaded", function(event) {
 
     class Pomme{
 
-        constructor(){
+        constructor(_leJeu){
 
             console.log("Création de la pomme");
 
+            this.leJeu = _leJeu;
+
+            this.pomme = [];
+
+            this.ajoutePomme();
         }
 
+        ajoutePomme(){
+            var posX = Math.floor(Math.random() * this.leJeu.grandeurGrille);
+            var posY = Math.floor(Math.random() * this.leJeu.grandeurGrille);
+
+            this.pomme = [this.leJeu.s.rect(posX * this.leJeu.grandeurCarre, posY * this.leJeu.grandeurCarre, this.leJeu.grandeurCarre, this.leJeu.grandeurCarre).attr({fill:'red'}), posX,posY];
+        }
+        supprimePomme(){
+            this.pomme[0].remove();
+        }
     }
 
 
