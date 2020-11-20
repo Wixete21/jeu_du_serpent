@@ -48,12 +48,60 @@ document.addEventListener("DOMContentLoaded", function(event) {
     //Le serpent
     class Serpent{
 
-        constructor(){
+        constructor(_leJeu){
 
             console.log("Création du serpent");
 
+            this.leJeu = _leJeu;
+
+            document.addEventListener("keydown", this.verifTouche.bind(this));
         }
 
+        verifTouche(_evt){
+            var evt = _evt;
+
+            console.log(evt.keyCode);
+
+            this.nextMoveX = 1;
+            this.nextMoveY = 0;
+
+            this.deplacement(evt.keyCode);
+        }
+
+        deplacement(dirCode){
+            switch (dirCode) {
+                case 37:
+                    this.nextMoveX = -1;
+                    this.nextMoveY = 0;
+                    break;
+                case 38:
+                    this.nextMoveX = 0;
+                    this.nextMoveY = -1;
+                    break;
+                case 39:
+                    this.nextMoveX = 1;
+                    this.nextMoveY = 0;
+                    break;
+                case 40:
+                    this.nextMoveX = 0;
+                    this.nextMoveY = 1;
+                    break;
+            }
+
+            console.log(this.nextMoveX, this.nextMoveY);
+        }
+
+        controleSerpent(){
+            //aller a 1h23m 
+        }
+
+        dessineCarre(x, Y){
+
+        }
+
+        supprimeSerpent(){
+
+        }
     }
     //La pomme
 
