@@ -54,6 +54,18 @@ document.addEventListener("DOMContentLoaded", function(event) {
 
             this.leJeu = _leJeu;
 
+            this.currentX = -1;
+            this.currentY = 0;
+
+            this.nextMoveX = 1;
+            this.nextMoveY = 0;
+
+            this.serpentLongueur = 1;
+            this.tblCarreSerpent = [];
+
+            this.vitesse = 250;
+            this.timing = setInterval(this.controleSerpent.bind(this), this.vitesse);
+
             document.addEventListener("keydown", this.verifTouche.bind(this));
         }
 
@@ -62,8 +74,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
 
             console.log(evt.keyCode);
 
-            this.nextMoveX = 1;
-            this.nextMoveY = 0;
+
 
             this.deplacement(evt.keyCode);
         }
@@ -88,11 +99,17 @@ document.addEventListener("DOMContentLoaded", function(event) {
                     break;
             }
 
-            console.log(this.nextMoveX, this.nextMoveY);
+            //console.log(this.nextMoveX, this.nextMoveY);
         }
 
         controleSerpent(){
-            //aller a 1h23m 
+            var nextX = this.currentX + this.nextMoveX;
+            var nextY = this.currentY + this.nextMoveY;
+
+
+            this.dessineCarre(nextX, nextY);
+            this.currentX = nextX;
+            this.currentY = nextY;
         }
 
         dessineCarre(x, Y){
